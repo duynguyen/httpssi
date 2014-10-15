@@ -1,0 +1,19 @@
+<html>
+<head>
+	<title>SSI Include</title>
+</head>
+
+<body>
+<!--include file="included.html" -->
+<!--#fsize file="/directives/Directive.js" --> bytes
+Last modified at <!--flastmod file="included.html" -->
+
+<!--#exec cmd="./script.cgi" -->
+
+<!--set var="testVar" value="hahaha" -->
+<!--echo var="testVar" -->
+<!--echooc var="testVar" -->
+<!--printenv -->
+<!--include virtual="./test.pl" -->
+</body>
+</html>
