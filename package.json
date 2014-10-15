@@ -1,22 +1,29 @@
 {
-    "author": "Duy Nguyen",
-    "name": "httpssi",
-    "description": "An HTTP server in Node.js with support for Server Side Include (SSI).",
-    "version": "1.0",
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/duynguyen/httpssi.git"
-    },
-    "main": "./lib/main",
-    "bin": {
-        "httpssi": "./bin/httpssi"
-    },
-    "dependencies": {},
-    "devDependencies": {
-        "mocha": "*"
-    },
-    "optionalDependencies": {},
-    "engines": {
-        "node": "*"
-    }
+  "author": "Duy Nguyen",
+  "name": "httpssi",
+  "description": "An HTTP server in Node.js with support for Server Side Include (SSI).",
+  "version": "0.0.0",
+  "main": "./lib/HttpSSI.js",
+  "bin": {
+    "httpssi": "./bin/httpssi"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/duynguyen/httpssi.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/duynguyen/httpssi/issues"
+  },
+  "homepage": "https://github.com/duynguyen/httpssi",
+  "dependencies": {
+    "exec-sync": "latest"
+  },
+  "devDependencies": {
+    "mocha": "latest"
+  },
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  }
 }
