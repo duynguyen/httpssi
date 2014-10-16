@@ -11,7 +11,7 @@ Usage
 ====
 From the root directory of your project, run directly in the installed module:
 ```sh
-INSTALL_DIR/node_modules/.bin/httpssi [--port=PORT_NUMBER] [--path=PATH/TO/SERVER_DIR] [--no-cache]
+INSTALL_DIR/node_modules/.bin/httpssi [port=PORT_NUMBER] [path=PATH/TO/SERVER_DIR] [no-cache]
 ```
 * Default port is 8080 and default path is the directory where user run server.
 

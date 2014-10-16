@@ -15,6 +15,9 @@ var TEST_DIR = __dirname + '/test_folder/';
 var parser = new SSIParser(TEST_DIR);
 SSICache.enableTestMode();
 
+// change working dir to TEST_DIR root
+process.chdir(TEST_DIR);
+
 describe("#include file", function() {
 	it("should process include directive with valid path", function() {
 		assertFileContent('testIncludeValid.shtml', 'testIncludeValid.shtml.expected');
@@ -131,6 +134,7 @@ describe("#http request", function() {
 	beforeEach(function(done) {
 		httpServer = new HttpSSI({
 			port: TEST_PORT,
+			part: 'test_folder/',
 			testMode: true
 		});
 		httpServer.start(done);
