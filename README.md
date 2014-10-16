@@ -39,7 +39,7 @@ To start the server with debug log, add flag `DEBUG=http` at the beginning of ru
 ```sh
 DEBUG=http node main.js
 ```
-
+There are several sample files in server_dir which can be used to test the module manually.
 
 Directives
 ====
@@ -63,7 +63,7 @@ set
 echo
 ----
 ```sh
-<!--#set var="actor" -->
+<!--#echo var="actor" -->
 ```
 printenv
 ----
@@ -124,11 +124,13 @@ http://nodejs.org/api
 
 http://en.wikipedia.org/wiki/Server_Side_Includes
 
-https://github.com/cmihail/HttpServerWithSSI
-
 http://httpd.apache.org/docs/current/mod/mod_include.html
 
 http://nodejs.org/docs/latest/api/util.html
+
+https://github.com/cmihail/HttpServerWithSSI
+
+https://github.com/67726e/node-ssi
 
 [HttpServerWithSSI]:https://github.com/cmihail/HttpServerWithSSI
 [exec-sync]:https://www.npmjs.org/package/exec-sync
