@@ -1,0 +1,4 @@
+<div>
+	<!--#set var="myTest" value="testValue" -->
+	<!--#echo var="myTest" -->
+</div>

@@ -1,0 +1,6 @@
+<div>
+	<!--#set var="myTest" value="testValue" -->
+	<!--#echo var="myTest" -->
+	<!--#set var="myTest" value="newTestValue" -->
+	<!--#echo var="myTest" -->
+</div>

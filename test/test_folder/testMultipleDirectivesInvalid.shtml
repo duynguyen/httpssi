@@ -1,0 +1,7 @@
+<div>
+<!--#include file="included.html" -->
+<!--#include file="sub_test_folder/included_sub.html" -->
+<!--#echo var="multiple" -->
+<!--#set var="multiple" value="directives" -->
+<!--#setinvalid var="multiple" value="directives" -->
+</div>

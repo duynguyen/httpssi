@@ -1,0 +1,10 @@
+<div>
+<h3>Test</h3>
+<p>
+	I am included.
+</p>
+Included in sub folder.
+<!--#echo var="multiple" -->
+
+<!--#setinvalid var="multiple" value="directives" -->
+</div>
