@@ -93,13 +93,14 @@ If a directive appears to be invalid, it will not be pre-processed and returned 
 
 Design Patterns
 ====
-Strategy pattern is applied in the implementation of this npm module, particularly for different types of directives. The parent Directive class has several subclasses such as IncludeDirective, EchoDirective, etc. This ensures the polymophism of the program since the calling method, in this case is SSIParser.parse(), does not need to know exactly the detailed implementation of Directive, and it only uses Directive.parse() and Directive.isValid() in the generic way. Differentiation is determined in DirectiveManager which decides which subclass is created for which directive.
+Strategy pattern is applied in the implementation of this npm module, particularly for different types of directives. The parent Directive class has several subclasses such as IncludeDirective, EchoDirective, etc. This ensures the flexibility of the architecture since the calling method, in this case is SSIParser.parse(), does not need to know exactly the detailed implementation of Directive, and it uses Directive.parse() and Directive.isValid() only in the generic way. Categorization is determined in DirectiveManager which decides which subclass is created for which directive.
 
 Implementation discussion
 ====
 
-One of the most difficult problems of this homework is handling the asynchronous fs.readFile() function inside the synchronous string.replace(). There is a solution found at [HttpServerWithSSI] which implements recursive algorithm, manually looping over each directive and replace its content. However, since that code is quite complicated and in order to respect the authorship, I eventually ended up using fs.readFileSync() to simplify the implementation, and used cache as a compensation for performance. To some extent, caching could be much more important than asynchronous processing because there are many requests to the same shtml file, so cache can significantly reduce IOs to files. Meanwhile, there might be several include directives in one shtml file but they are only read synchronously once during server up-time (and cached subsequently).
-As specified in the homework requirement, the available good solution mentioned above can be applied to optimize the performance in production systems.
+One of the most challenging problems of this homework is handling the asynchronous fs.readFile() function inside the synchronous string.replace(). There is a solution found at [HttpServerWithSSI] which implements recursive algorithm, manually looping over each directive and replace its content. However, since that code is quite complicated and in order to respect the authorship, I eventually end up using fs.readFileSync() to simplify the implementation, and use cache as a compensation for performance. To some extent, caching could be much more important than asynchronous processing because there are many requests to the same shtml file, so cache can significantly reduce IOs to files. Meanwhile, there might be several include directives in one shtml file but they are only read synchronously once during server up-time (and cached subsequently).
+
+In real working environment, the available good solution mentioned above should be applied to optimize the performance in production systems.
 
 Testing
 ====
@@ -115,7 +116,7 @@ Tools & Libraries
 
 [debug]: small debugging utility
 
-[mocha]: a famous test framework
+[mocha]: a famous test framework for node.js application
 
 Rererences
 ====
