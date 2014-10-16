@@ -3,7 +3,7 @@ var HttpSSI = require('../lib/HttpSSI');
 var SSICache = require('../lib/SSICache');
 var options = {};
 process.argv.slice(2).forEach(function(arg){
-	// Each arg is: --option=value
+	// Each arg is: option=value
 	var argArray = arg.split('=');
 
 	switch (argArray[0]) {
