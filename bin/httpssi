@@ -1,6 +1,21 @@
 #!/usr/bin/env node
-var path = require('path');
-var fs = require('fs');
-// var lib = path.join(path.dirname(fs.realpathSync(__filename)), '../lib');
-// var HttpSSI = require('../lib/HttpSSI');
-// new HttpSSI().start();
+var HttpSSI = require('../lib/HttpSSI');
+var SSICache = require('../lib/SSICache');
+var options = {};
+process.argv.slice(2).forEach(function(arg){
+	// Each arg is: --option=value
+	var argArray = arg.split('=');
+
+	switch (argArray[0]) {
+		case '--port':
+			options.port = argArray[1];
+			break;
+		case '--path':
+			options.path = argArray[1];
+			break;
+		case '--no-cache':
+			SSICache.enableTestMode();
+			break;
+	}
+});
+new HttpSSI(options).start();

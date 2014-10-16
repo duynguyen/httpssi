@@ -1,4 +1,5 @@
 <div>
+<!--#include file="included.html" virtual="something" -->
 <!--#include file="/test_folder/included.html" -->
 <!--#include file="../test/test_folder/included.html" -->
 <!--#include file="included-not-exist.html" -->

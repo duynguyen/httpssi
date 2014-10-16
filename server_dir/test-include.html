@@ -1,31 +1,50 @@
 <html>
 <head>
-	<title>SSI Include</title>
+	<title>SSI Include Test</title>
 </head>
 
 <body>
+<h3>#include</h3>
 <p>
-	<!--#include file="included.html" -->
+	<!--#include file="included.html" --><br>
+	<!--#include file="included_invalid.html" --><br>
+	<!--#include file="/included.html" --><br>
+	<!--#include file="../README.md" --><br>
 </p>
+<h3>#fsize and #flastmod</h3>
 <p>
-	<!--#fsize file="directives/Directive.js" --> bytes
-	Last modified at <!--#flastmod file="included.html" -->
+	<!--#fsize file="included.html" --> bytes<br>
+	<!--#fsize file="/included.html" --> bytes<br>
+	<!--#fsize file="../README.md" --> bytes<br>
+	Last modified at <!--#flastmod file="included.html" --><br>
+	Last modified at <!--#flastmod file="/included.html" --><br>
+	Last modified at <!--#flastmod file="../README.md" --><br>
+	Invalid stat <!--#ffirstmod file="../README.md" --><br>
 </p>
+<h3>#exec</h3>
 <p>
-	<!--#exec cgi="./script.cgi" -->
+	<!--#exec cgi="./script.cgi" --><br>
+	<!--#exec cmd="./script.cgi" --><br>
+	<!--#exec cgi="ls" --><br>
+	<!--#exec cmd="ls" --><br>
 </p>
+<h3>#set and #echo</h3>
 <p>
-	#set testVar = hahaha
-	<!--#set var="testVar" value="hahaha" -->
-	#get testVar
-	<!--#echo var="testVar" -->
+	#set<br>
+	<!--#set var="testVar" value="Chao!" --><br>
+	<!--#set var="testVar" --><br>
+	#get<br>
+	<!--#echo var="testVar" --><br>
 </p>
+<h3>#printenv</h3>
 <p>
-	<!--#echooc var="testVar" -->
+	<!--#printenv --><br>
+	<!--#printenv var="invalid" --><br>
 </p>
+<h3>Invalid cases</h3>
 <p>
-	<!--#printenv -->
+	<!--#echooc var="testVar" --><br>
+	<!--echo var="testVar" --><br>
 </p>
-<!--include virtual="./test.pl" -->
 </body>
 </html>

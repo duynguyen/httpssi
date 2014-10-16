@@ -10,9 +10,9 @@ var SSIParser = require('../lib/SSIParser');
 var HttpSSI = require('../lib/HttpSSI');
 
 var TEST_PORT = 9655;
-var TEST_PATH = __dirname + '/test_folder/';
+var TEST_DIR = __dirname + '/test_folder/';
 
-var parser = new SSIParser(TEST_PATH);
+var parser = new SSIParser(TEST_DIR);
 SSICache.enableTestMode();
 
 describe("#include file", function() {
@@ -87,7 +87,7 @@ describe("#filestats", function() {
 	var stat;
 
 	beforeEach(function() {
-		stat = fs.statSync(TEST_PATH + 'included.html');
+		stat = fs.statSync(TEST_DIR + 'included.html');
 	});
 	
 	afterEach(function() {
@@ -128,60 +128,79 @@ describe("multiple directives", function() {
 
 describe("#http request", function() {
 	var httpServer;
-	var options = {
-			host: 'http://localhost',
-			port: TEST_PORT,
-			path: 'testMultipleDirectivesValid.shtml',
-			method: 'GET'
-		};
-	beforeEach(function() {
+	beforeEach(function(done) {
 		httpServer = new HttpSSI({
 			port: TEST_PORT,
-			path: TEST_PATH,
 			testMode: true
 		});
-		httpServer.start();
+		httpServer.start(done);
 	});
 
-	afterEach(function() {
+	afterEach(function(done) {
 		httpServer.stop();
+		done();
 	});
 
 	it("should pre-process shtml file with valid get request", function(done) {
-		var req = http.request(options, function(res) {
-			res.on('data', function (chunk) {
-				assertContent(chunk, 'testMultipleDirectivesValid.shtml.expected');
+		http.get("http://localhost:" + TEST_PORT + "/testIncludeValid.shtml", function(res) {
+			res.setEncoding('binary');
+			var data = '';
+			res.on('data', function(chunk) {
+				data += chunk;
+			});
+			
+			res.on('end', function() {
+				assertContent(data, 'testIncludeValid.shtml.expected');
 				done();
 			});
+		}).on('error', function(e) {
+			console.log("Got error: " + e.message);
 		});
-		req.end();
 	});
 
 	it("should not pre-process any non-shtml file", function(done) {
-		options.path = 'testSSI.html';
-		var req = http.request(options, function(res) {
-			res.on('data', function (chunk) {
-				assertContent(chunk, 'testSSI.html');
+		http.get("http://localhost:" + TEST_PORT + "/testSSI.html", function(res) {
+			res.setEncoding('binary');
+			var data = '';
+			res.on('data', function(chunk) {
+				data += chunk;
+			});
+			
+			res.on('end', function() {
+				assertContent(data, 'testSSI.html');
 				done();
 			});
+		}).on('error', function(e) {
+			console.log("Got error: " + e.message);
 		});
-		req.end();
 	});
 });
 
+/**
+ * @param file: name of the file being parsed
+ * @param expected: expected output
+ */
 function assertFileContent(file, expected) {
-	var fileData = fs.readFileSync(path.join(TEST_PATH, file), 'binary');
-	var expectedData = fs.readFileSync(path.join(TEST_PATH, expected), 'binary');
+	var fileData = fs.readFileSync(path.join(TEST_DIR, file), 'binary');
+	var expectedData = fs.readFileSync(path.join(TEST_DIR, expected), 'binary');
 	assert.equal(parser.parse(fileData), expectedData);
 };
 
+/**
+ * @param content: string content to be compared
+ * @param expected: expected output
+ */
 function assertContent(content, expectedFile) {
-	var expectedData = fs.readFileSync(path.join(TEST_PATH, expectedFile), 'binary');
+	var expectedData = fs.readFileSync(path.join(TEST_DIR, expectedFile), 'binary');
 	assert.equal(content, expectedData);
 };
 
+/**
+ * @param file: name of the file being parsed
+ * @param expectedTexts: list of texts expected to appear in output
+ */
 function containedInFileContent(file, expectedTexts) {
-	var fileData = fs.readFileSync(path.join(TEST_PATH, file), 'binary');
+	var fileData = fs.readFileSync(path.join(TEST_DIR, file), 'binary');
 	var parsedData = parser.parse(fileData);
 	for(var i in expectedTexts) {
 		assert(parsedData.indexOf(expectedTexts[i]) > -1);

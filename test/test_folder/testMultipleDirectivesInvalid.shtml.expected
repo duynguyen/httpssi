@@ -5,6 +5,6 @@
 </p>
 Included in sub folder.
 <!--#echo var="multiple" -->
-
+directives
 <!--#setinvalid var="multiple" value="directives" -->
 </div>

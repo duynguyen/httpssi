@@ -15,9 +15,13 @@
   "bugs": {
     "url": "https://github.com/duynguyen/httpssi/issues"
   },
+  "scripts": {
+    "test": "make test"
+  },
   "homepage": "https://github.com/duynguyen/httpssi",
   "dependencies": {
-    "exec-sync": "latest"
+    "exec-sync": "latest",
+    "debug": "latest"
   },
   "devDependencies": {
     "mocha": "latest"
